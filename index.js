@@ -1,18 +1,12 @@
 const mysql = require("mysql");
 const consoleTable = require("console.table");
 const db = require("./db");
-//const { prompt } = require("inquirer");
 const inquirer = require("inquirer");
 
-// startConnection();
-// function startConnection() {
-//   startViewing();
-// }
 startViewing();
-
-function startViewing() {
+//Select what you would like to do
+async function startViewing() {
   console.log(`I'm viewing!`);
-  //const {action} = await prompt() ([
   inquirer
     .prompt([
       {
@@ -40,16 +34,38 @@ function startViewing() {
         return;
       }
       if (answer.action === "View All Employees by Department") {
-          console.log("view employees by department");
-          allByDepartmentsView();
+        console.log("view employees by department");
+        allByDepartmentsView();
+        whichDepartment();
+        return;
       }
-      //   switch (answer) {
-      //     case viewAllEmployees:
-      //       allEmployeesView;
-      //       break;
-      //   }
     });
 }
+// Select which employees to view by department
+async function whichDepartment() {
+          inquirer.prompt([
+              {
+                  name: "dep",
+                  type: "list",
+                  choices: [
+                      "Support",
+                      "Sales",
+                      "Engineering",
+                      "Finance",
+                      "Legal"
+                  ],
+                  message: "Select department:"
+              }
+          ]).then((answer) => {
+              if (answer.dep === "Support") {
+                    console.log("Support employees");
+                    allEmployeesByDep();
+                  }
+                  else {
+                      console.log("we don't have any employees in that department");
+                  }
+          });
+        }
 
 async function allEmployeesView() {
   const employees = await db.viewEmployees();
@@ -57,8 +73,13 @@ async function allEmployeesView() {
 }
 
 async function allByDepartmentsView() {
-    const employeeDepartments = await db.viewDepartments();
-    console.table(employeeDepartments);
+  const employeeDepartments = await db.viewDepartments();
+  console.table(employeeDepartments);
+}
+
+async function allEmployeesByDep() {
+    const employeesDep = await db.employeeByDepartment();
+    console.table(employeesDep);
 }
 
 //   {

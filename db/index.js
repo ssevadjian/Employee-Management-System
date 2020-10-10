@@ -1,6 +1,6 @@
 const connection = require("./connection");
-const util = require("util");
-const inquirer = require("inquirer");
+//const util = require("util");
+//const inquirer = require("inquirer");
 
 class DB {
   constructor(connection) {
@@ -23,7 +23,18 @@ class DB {
             console.table(res);
         });
     }
+    employeeByDepartment() {
+        console.log("Querying employees by department");
+        return this.connection.query("SELECT first_name, last_name FROM employee LEFT OUTER JOIN roles ON employee.role_id = roles.department_id", function (err, res) {
+            if (err) throw err;
+            console.table(res);
+        })
+    }
+  
+  //end of class curly brace  
   }
+
+
   // viewRoles() {
   //     return this.connection.query()
   // }
