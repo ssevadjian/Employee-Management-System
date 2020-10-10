@@ -44,7 +44,7 @@ function startViewing() {
 }
 
 async function allEmployeesView() {
-  const employees = await DB.viewEmployees();
+  const employees = await db.viewEmployees();
   console.table(employees);
 }
 
