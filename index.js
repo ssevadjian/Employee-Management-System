@@ -31,8 +31,8 @@ function startViewing() {
     },
   ]).then(answer => {
       console.log('my answer!');
-      if (answer.choices === "View All Employees" ) {
-          console.log('A');
+      if (answer = "View All Employees" ) {
+          console.log('view all employees');
           allEmployeesView();
       }
 //   switch (answer) {

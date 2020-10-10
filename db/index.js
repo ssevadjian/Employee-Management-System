@@ -10,9 +10,8 @@ class DB {
 
     //View departments, roles, employees
     viewEmployees() {
-        return this.connection.query(
-            'SELECT first_name, last_name FROM employee;'
-            )
+        console.log('Querying all employees..');
+        return this.connection.query('SELECT * FROM employee')
     }
     // viewRoles() {
     //     return this.connection.query()
