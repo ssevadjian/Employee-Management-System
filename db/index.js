@@ -15,25 +15,20 @@ class DB {
       if (err) throw err;
       console.table(res);
     });
-    // viewDepartments() {
-    //     console.log("Querying all departments..");
-    //     return this.connection.query("SELECT ? FROM department", function (err, res) {
-    //         if (err) throw err;
-    //         console.table(res);
-    //     });
-    // }
+    }
+    viewDepartments() {
+        console.log("Querying all departments..");
+        return this.connection.query("SELECT * FROM department", function (err, res) {
+            if (err) throw err;
+            console.table(res);
+        });
+    }
   }
   // viewRoles() {
   //     return this.connection.query()
   // }
-  // viewDepartments() {
-  //     SELECT * FROM department;
-  // }
 
   // Update employee roles
-}
-
-//const db = new DB(connection);
 
 module.exports = new DB(connection);
-//module.exports 
+

@@ -33,15 +33,15 @@ function startViewing() {
     ])
     .then((answer) => {
       console.log("this is ", answer);
-      console.log("my answer!");
-      console.log("this was my choice", answer.action);
+      console.log("this was my choice:", answer.action);
       if (answer.action === "View All Employees") {
         console.log("view all employees");
         allEmployeesView();
-        console.log("am i the answer?");
         return;
-      } else {
-          console.log("not verified");
+      }
+      if (answer.action === "View All Employees by Department") {
+          console.log("view employees by department");
+          allByDepartmentsView();
       }
       //   switch (answer) {
       //     case viewAllEmployees:
@@ -52,9 +52,13 @@ function startViewing() {
 }
 
 async function allEmployeesView() {
-  console.log(`I'm accessing the db/index.js file from the main index file`);
   const employees = await db.viewEmployees();
   console.table(employees);
+}
+
+async function allByDepartmentsView() {
+    const employeeDepartments = await db.viewDepartments();
+    console.table(employeeDepartments);
 }
 
 //   {
