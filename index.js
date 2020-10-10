@@ -3,17 +3,13 @@ const consoleTable = require('console.table');
 const db = require('./db');
 const { prompt } = require('inquirer');
 
-startConnection();
-
 function startConnection() {
     startViewing();
 }
 
-
-
 async function startViewing() {
 
-    const {action} = await prompt() ([
+    inquirer.prompt([
         {
             name: "action",
             type: "list",

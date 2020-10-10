@@ -7,7 +7,9 @@ const connection = mysql.createConnection({
     database : 'ems_DB'
 });
 // Start connection
-connection.connect();
+connection.connect(function(err) {
+    console.log('Connected!');
+});
 
 
 // connection.connect(err => {
