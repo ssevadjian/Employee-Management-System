@@ -1,4 +1,5 @@
 const connection = require('./connection');
+const util = require('util');
 
 class DB {
     constructor(connection) {

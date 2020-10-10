@@ -1,54 +1,64 @@
-const mysql = require('mysql');
-const consoleTable = require('console.table');
-const db = require('./db');
-const { prompt } = require('inquirer');
+const mysql = require("mysql");
+const consoleTable = require("console.table");
+const db = require("./db");
+//const { prompt } = require("inquirer");
+const inquirer = require('inquirer');
 
-function startConnection() {
-    startViewing();
+// startConnection();
+// function startConnection() {
+//   startViewing();
+// }
+startViewing();
+
+function startViewing() {
+  console.log(`I'm viewing!`);
+  //const {action} = await prompt() ([
+  inquirer.prompt([
+    {
+      name: "action",
+      type: "rawlist",
+      choices: [
+        "View All Employees",
+        "View All Employees by Department",
+        "View All Employees by Role",
+        "View All Employees by Manager",
+        "Add Employee",
+        "Remove Employee",
+        "Update Employee Role",
+        "Update Employee Manager"
+      ],
+      message: "What would you like to do?",
+    },
+  ]).then(answer => {
+      console.log('my answer!');
+      if (answer.choices === "View All Employees" ) {
+          console.log('A');
+          allEmployeesView();
+      }
+//   switch (answer) {
+//     case viewAllEmployees:
+//       allEmployeesView;
+//       break;
+//   }
+})
 }
 
-async function startViewing() {
+async function allEmployeesView() {
+  const employees = await DB.viewEmployees();
+  console.table(employees);
+}
 
-    inquirer.prompt([
-        {
-            name: "action",
-            type: "list",
-            choices: [
-                        "View All Employees",
-                        "View All Employees by Department",
-                        "View All Employees by Role",
-                        "View All Employees by Manager",
-                        "Add Employee",
-                        "Remove Employee",
-                      ],
-            message: "What would you like to do?"
-        }
-    ])
-        switch(action) {
-            case viewAllEmployees:
-                allEmployeesView;
-                break;
-        }
-
-    }
-    
-    async function allEmployeesView() {
-        const employees = await DB.viewEmployees();
-        console.table(employees);
-    }
-        
-  
-    //   {
-    //       name: "startingBid",
-    //       type: "input",
-    //       message: "What would you like the starting bid to be?",
-    //       validate: function(value) {
-    //           if(isNaN(value) === false) {
-    //               return true;
-    //           }
-    //           return false;
-    //       }
-    //   }
+//   {
+//       name: "startingBid",
+//       type: "input",
+//       message: "What would you like the starting bid to be?",
+//       validate: function(value) {
+//           if(isNaN(value) === false) {
+//               return true;
+//           }
+//           return false;
+//       }
+//   }
 //   ]).then(({itemName, startingBid}) => {
 //       const query = "INSERT INTO  SET ?;";
 
