@@ -1,5 +1,6 @@
 const connection = require("./connection");
 const util = require("util");
+const inquirer = require("inquirer");
 
 class DB {
   constructor(connection) {
@@ -14,6 +15,13 @@ class DB {
       if (err) throw err;
       console.table(res);
     });
+    // viewDepartments() {
+    //     console.log("Querying all departments..");
+    //     return this.connection.query("SELECT ? FROM department", function (err, res) {
+    //         if (err) throw err;
+    //         console.table(res);
+    //     });
+    // }
   }
   // viewRoles() {
   //     return this.connection.query()

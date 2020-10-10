@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const consoleTable = require("console.table");
 const db = require("./db");
 //const { prompt } = require("inquirer");
-const inquirer = require('inquirer');
+const inquirer = require("inquirer");
 
 // startConnection();
 // function startConnection() {
@@ -13,37 +13,46 @@ startViewing();
 function startViewing() {
   console.log(`I'm viewing!`);
   //const {action} = await prompt() ([
-  inquirer.prompt([
-    {
-      name: "action",
-      type: "rawlist",
-      choices: [
-        "View All Employees",
-        "View All Employees by Department",
-        "View All Employees by Role",
-        "View All Employees by Manager",
-        "Add Employee",
-        "Remove Employee",
-        "Update Employee Role",
-        "Update Employee Manager"
-      ],
-      message: "What would you like to do?",
-    },
-  ]).then(answer => {
-      console.log('my answer!');
-      if (answer = "View All Employees" ) {
-          console.log('view all employees');
-          allEmployeesView();
+  inquirer
+    .prompt([
+      {
+        name: "action",
+        type: "rawlist",
+        choices: [
+          "View All Employees",
+          "View All Employees by Department",
+          "View All Employees by Role",
+          "View All Employees by Manager",
+          "Add Employee",
+          "Remove Employee",
+          "Update Employee Role",
+          "Update Employee Manager",
+        ],
+        message: "What would you like to do?",
+      },
+    ])
+    .then((answer) => {
+      console.log("this is ", answer);
+      console.log("my answer!");
+      console.log("this was my choice", answer.action);
+      if (answer.action === "View All Employees") {
+        console.log("view all employees");
+        allEmployeesView();
+        console.log("am i the answer?");
+        return;
+      } else {
+          console.log("not verified");
       }
-//   switch (answer) {
-//     case viewAllEmployees:
-//       allEmployeesView;
-//       break;
-//   }
-})
+      //   switch (answer) {
+      //     case viewAllEmployees:
+      //       allEmployeesView;
+      //       break;
+      //   }
+    });
 }
 
 async function allEmployeesView() {
+  console.log(`I'm accessing the db/index.js file from the main index file`);
   const employees = await db.viewEmployees();
   console.table(employees);
 }
